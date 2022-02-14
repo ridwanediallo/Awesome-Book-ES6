@@ -3,7 +3,6 @@ const addBtn = document.querySelector('.add-btn');
 const inputAuthor = document.querySelector('.author');
 const inputTitle = document.querySelector('.title');
 
- 
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -11,20 +10,20 @@ class Book {
   }
 }
 
-export class Library {
+export default class Library {
       bookCollection = [];
-  
+
       constructor() {
         addBtn.addEventListener('click', this.addBook.bind(this));
         books.addEventListener('click', this.clickToremove.bind(this));
         this.getLocalStorage();
       }
-  
+
       setLocalStorage() {
         localStorage.setItem('bookCollection', JSON.stringify(this.bookCollection));
       }
-  
-      getLocalStorage = function () {
+
+      getLocalStorage = () => {
         /* eslint-disable */
           localStorage.getItem('bookCollection')
               ? (this.bookCollection = JSON.parse(
@@ -34,7 +33,7 @@ export class Library {
           /* eslint-enable */
         this.renderList();
       };
-  
+
       renderList() {
         books.innerHTML = '';
         this.bookCollection.forEach((el, i) => {
@@ -55,7 +54,7 @@ export class Library {
           books.style.border = '2px solid black';
         } else books.style.border = 'none';
       }
-  
+
       addBook() {
         const title = inputTitle.value;
         const author = inputAuthor.value;
@@ -68,22 +67,21 @@ export class Library {
         inputTitle.value = '';
         inputAuthor.value = '';
       }
-  
+
       removeList = (el) => {
         this.bookCollection.splice(el, 1);
         this.setLocalStorage();
         this.renderList();
       };
-  
+
       clickToremove(e) {
         if (e.target.classList.contains('remove-btn')) {
           const removeBtn = +e.target.dataset.id;
           this.removeList(removeBtn);
         }
       }
-  }
+}
 
 // /* eslint-disable */
 // const library = new Library();
 // /* eslint-enable */
-
