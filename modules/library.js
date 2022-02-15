@@ -10,7 +10,7 @@ class Book {
   }
 }
 
-export default class Library {
+class Library {
       bookCollection = [];
 
       constructor() {
@@ -85,3 +85,4 @@ export default class Library {
 // /* eslint-disable */
 // const library = new Library();
 // /* eslint-enable */
+export default Library;
